@@ -1,0 +1,67 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdafx.h> 
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Stack 
+{
+private:
+    string* stck;
+    int ts;
+    int sz;
+
+public:
+    Stack(int size) 
+    {
+        sz = size;
+        stck = new string[2 * sz];
+        ts = 0;
+    }
+
+    ~Stack() {
+        delete[]stck;
+    }
+
+    void push(string itm) 
+{
+        if (ts == 2 * sz)
+            cout << "Stack is full!" << endl;
+        else stck[ts++] = itm;
+    }
+
+    string pop() {
+        if (ts < 0) {
+            cout << "Stack isn't loaded!" << endl;
+            return 0;
+        }
+        else return stck[--ts];
+    }
+};
+
+int main() {
+    setlocale(0, "rus");
+    cout << "Stack size: ";
+    int n;
+    cin >> n;
+    Stack mystck1(n);
+    string st;
+
+
+    for (int i = 0; i < n; i++) 
+{
+        cout << "Book title: ";
+        cin >> st;
+        mystck1.push(st);
+        cout << "Input a page quantity : ";
+        cin >> st;
+        mystck1.push(st);
+    }
+    for (int i = 0; i < n; i++)
+        cout << "By the book with title: " << mystck1.pop() << " Has pages: " << mystck1.pop() << endl;
+
+
+    cin.get();
+    cin.get();
+    return 0;
+}
