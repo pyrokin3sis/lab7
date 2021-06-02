@@ -1,0 +1,62 @@
+#include <iostream>
+ #include <fstream>
+ #include <conio.h>
+ 
+using namespace std;
+
+/*Вариант 10 высокий уровень*
+Даны две непустые очереди; адреса начала и конца первой рав-
+ны P1 и P2, а второй — P3 и P4. Элементы каждой из очередей упорядочены
+по возрастанию (в направлении от начала очереди к концу). Объединить
+очереди в одну с сохранением упорядоченности элементов. Вывести ука-
+затели на начало и конец полученной очереди. Операции выделения и
+освобождения памяти не использовать, поля Data не изменять.
+ 
+const int n = 500;
+ 
+int main()
+ {
+ int prost[n];
+ prost[0] = 1;
+ int k = 1;
+ 
+for(int i = 3; i <= 100; i++)
+ {
+ bool yes = true;
+ for(int j = 2; j < i; j++)
+ if(i / j * j == i)
+ yes = false;
+ if(yes)
+ {
+ prost[k] = i;
+ k++;
+ }
+ }
+ 
+ifstream fin("INPUT.txt");
+ ofstream fout("OUTPUT.txt");
+ double A[100];
+ int p = 0;
+ while(true)
+ {
+ if(fin.eof())
+ {
+ break;
+ }
+ fin >> A[p];
+ p++;
+ }
+ for(int i = p-1; i >= 0; i--)
+ for(int j = 0; j < k; j++)
+ if(A[i] == prost[j])
+ {
+ A[i] = 6;
+ goto A;
+ }
+ A:
+ for(int i = 0; i < p; i++)
+ fout << A[i] << " ";
+ 
+getch();
+ return 0;
+ }
